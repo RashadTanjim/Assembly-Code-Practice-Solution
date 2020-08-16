@@ -1,0 +1,71 @@
+ORG 100H 
+ 
+.MODEL SMALL
+.STACK 100H 
+ 
+ 
+.DATA 
+N DB "abcde$"
+
+ 
+.CODE 
+ 
+MAIN PROC
+
+ MOV AX, @DATA
+ MOV DS, AX
+
+
+ MOV BL,N[0]
+SUB BL,20H 
+
+
+ MOV CL,N[1]
+SUB CL,20H 
+
+
+
+ MOV CH,N[2]
+SUB CH,20H 
+
+
+
+ MOV BH,N[3]
+SUB BH,20H 
+
+        
+
+ MOV DH,N[4]
+SUB DH,20H  
+
+MOV AH,2
+
+MOV DL,BL
+INT 21H
+
+MOV DL,CL
+INT 21H
+
+MOV DL,CH
+INT 21H
+ 
+ 
+MOV DL,BH
+INT 21H
+ 
+ 
+ 
+MOV DL, DH 
+INT 21H  
+
+
+MOV AH,4ch
+INT 21H
+ 
+MAIN ENDP
+END MAIN
+
+
+
+
+
