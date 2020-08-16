@@ -1,0 +1,57 @@
+org 100h
+; add your code here
+LEA si, str1  
+LEA di, str2 
+LEA bp, str3
+mov ah, 1 
+mov cx, 0 
+mov dx, 0
+input1:
+int 21h
+cmp al, 0dh
+je input2
+mov [si], al
+inc si 
+inc cx
+jmp input1 
+input2:
+int 21h
+cmp al, 0dh
+je l1
+mov [di], al
+inc di 
+inc dx
+jmp input2 
+l1:
+LEA si, str1  
+LEA di, str2  
+concat1:
+mov al, [si] 
+mov [bp], al
+inc si
+inc bp
+loop concat1  
+mov cx, dx
+concat2:
+mov al, [di] 
+mov [bp], al
+inc di
+inc bp
+loop concat2
+
+mov ah, 2 
+mov dh, 0
+mov dl, 0ah
+int 21h
+mov [bp], '$'
+mov ah, 9
+lea dx, str3
+int 21h
+
+ret
+str1 db 50 dup(?) 
+str2 db 50 dup(?)
+str3 db 50 dup(?)
+
+
+
